@@ -1,9 +1,9 @@
+import WelcomeScreen from './components/WelcomeScreen';
+
 function App() {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '5rem', fontWeight: 'bold', fontFamily: 'sans-serif' }}>
-      hello world
-    </div>
-  )
+    <WelcomeScreen />
+  );
 }
 
-export default App
+export default App;
