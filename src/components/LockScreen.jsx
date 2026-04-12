@@ -35,8 +35,9 @@ const LockScreen = ({ onUnlock, isActive }) => {
   const bgPath = `${import.meta.env.BASE_URL}bgimage2.jpg`;
 
   const timeString = time.toLocaleTimeString([], {
-    hour: '2-digit',
+    hour: 'numeric',
     minute: '2-digit',
+    hour12: true,
   });
   const dateString = time.toLocaleDateString([], {
     weekday: 'long',

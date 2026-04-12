@@ -1,12 +1,23 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import LockScreen from './components/LockScreen';
 import LoginScreen from './components/LoginScreen';
 import DesktopScreen from './components/DesktopScreen';
+import MobileView from './components/MobileView';
 import './App.css';
 
 function App() {
   const [screen, setScreen] = useState('lock'); // 'lock' | 'login' | 'loading' | 'desktop'
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 400);
   const transitionRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 400);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleUnlock = useCallback(() => {
     setScreen((prev) => (prev === 'lock' ? 'login' : prev));
@@ -24,6 +35,10 @@ function App() {
       return 'loading';
     });
   }, []);
+
+  if (isMobile) {
+    return <MobileView />;
+  }
 
   const isLockVisible = screen === 'lock';
   const isLoginVisible = screen === 'login' || screen === 'loading';

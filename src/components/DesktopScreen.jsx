@@ -1,7 +1,7 @@
 import './DesktopScreen.css';
 
 const DesktopScreen = () => {
-  const bgPath = `${import.meta.env.BASE_URL}bgimage.webp`;
+  const bgPath = `${import.meta.env.BASE_URL}bgimage.jpg`;
 
   return (
     <div
