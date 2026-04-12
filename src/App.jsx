@@ -1,45 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import LockScreen from './components/LockScreen';
-import WelcomeScreen from './components/WelcomeScreen';
+import LoginScreen from './components/LoginScreen';
 import DesktopScreen from './components/DesktopScreen';
 import './App.css';
 
 function App() {
-  const [appState, setAppState] = useState('lock'); // 'lock', 'login', 'loading', 'desktop'
+  const [screen, setScreen] = useState('lock'); // 'lock' | 'login' | 'loading' | 'desktop'
+  const transitionRef = useRef(null);
 
-  const handleUnlock = () => {
-    if (appState === 'lock') {
-      setAppState('login');
-    }
-  };
+  const handleUnlock = useCallback(() => {
+    setScreen((prev) => (prev === 'lock' ? 'login' : prev));
+  }, []);
 
-  const handleSignIn = () => {
-    setAppState('loading');
-    setTimeout(() => {
-      setAppState('desktop');
-    }, 2000);
-  };
+  const handleSignIn = useCallback(() => {
+    setScreen((prev) => {
+      if (prev !== 'login') return prev; // guard: only transition from login
+      // Clear any existing timeout to prevent race conditions
+      if (transitionRef.current) clearTimeout(transitionRef.current);
+      transitionRef.current = setTimeout(() => {
+        setScreen('desktop');
+        transitionRef.current = null;
+      }, 2000);
+      return 'loading';
+    });
+  }, []);
+
+  const isLockVisible = screen === 'lock';
+  const isLoginVisible = screen === 'login' || screen === 'loading';
+  const isDesktopVisible = screen === 'desktop';
 
   return (
     <div className="app-container">
-      {/* Lock Screen Layer */}
-      <div 
-        className={`screen-layer ${appState === 'lock' ? 'layer-visible' : 'layer-hidden'}`}
-      >
-        <LockScreen onUnlock={handleUnlock} />
+      <div className={`screen-layer ${isLockVisible ? 'layer-visible' : 'layer-hidden'}`}>
+        <LockScreen onUnlock={handleUnlock} isActive={isLockVisible} />
       </div>
 
-      {/* Login Screen Layer */}
-      <div 
-        className={`screen-layer ${(appState === 'login' || appState === 'loading') ? 'layer-visible' : 'layer-hidden'}`}
-      >
-        <WelcomeScreen appState={appState} onSignIn={handleSignIn} />
+      <div className={`screen-layer ${isLoginVisible ? 'layer-visible' : 'layer-hidden'}`}>
+        <LoginScreen screen={screen} onSignIn={handleSignIn} />
       </div>
 
-      {/* Desktop Screen Layer */}
-      <div 
-        className={`screen-layer ${appState === 'desktop' ? 'layer-visible' : 'layer-hidden'}`}
-      >
+      <div className={`screen-layer ${isDesktopVisible ? 'layer-visible' : 'layer-hidden'}`}>
         <DesktopScreen />
       </div>
     </div>

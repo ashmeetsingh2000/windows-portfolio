@@ -13,12 +13,13 @@
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   cursor: pointer;
+  user-select: none;
 }
 
 .lock-clock {
   z-index: 2;
   text-align: left;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .lock-time {
@@ -26,10 +27,12 @@
   font-weight: 300;
   margin: 0;
   line-height: 1;
+  letter-spacing: -2px;
 }
 
 .lock-date {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 400;
   margin: 12px 0 0 0;
+  opacity: 0.9;
 }

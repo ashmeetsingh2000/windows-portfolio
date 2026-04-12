@@ -12,7 +12,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+  will-change: opacity;
+  transition: opacity 0.8s ease-in-out;
 }
 
 .layer-visible {
@@ -27,4 +28,5 @@
   visibility: hidden;
   z-index: 1;
   pointer-events: none;
+  transition: opacity 0.8s ease-in-out, visibility 0s linear 0.8s;
 }

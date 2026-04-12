@@ -1,34 +1,32 @@
-import React from 'react';
-import './WelcomeScreen.css';
+import './LoginScreen.css';
 
-const WelcomeScreen = ({ appState, onSignIn }) => {
-  // Base URL resolution for GitHub Pages compatability
+const LoginScreen = ({ screen, onSignIn }) => {
   const bgPath = `${import.meta.env.BASE_URL}bgimage2.jpg`;
   const profilePath = `${import.meta.env.BASE_URL}profile2.jpg`;
 
   return (
     <div
-      className="welcome-container"
+      className="login-container"
       style={{ backgroundImage: `url(${bgPath})` }}
     >
-      <div className="background-overlay"></div>
+      <div className="login-blur-overlay" />
 
-      <div className="login-screen">
+      <div className="login-content">
         <div className="avatar-container">
           <img src={profilePath} alt="Profile" className="profile-image" />
         </div>
         <h1 className="user-name">Ashmeet Singh</h1>
 
         <div className="action-container">
-          {appState === 'initial' && (
+          {screen === 'login' && (
             <button className="sign-in-button" onClick={onSignIn}>
               Sign In
             </button>
           )}
 
-          {appState === 'loading' && (
+          {screen === 'loading' && (
             <div className="loader-container">
-              <div className="windows-spinner"></div>
+              <div className="windows-spinner" />
               <p className="loading-text">Welcome</p>
             </div>
           )}
@@ -38,4 +36,4 @@ const WelcomeScreen = ({ appState, onSignIn }) => {
   );
 };
 
-export default WelcomeScreen;
+export default LoginScreen;
