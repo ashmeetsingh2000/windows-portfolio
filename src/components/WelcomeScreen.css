@@ -20,11 +20,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
-.login-screen, .desktop-screen {
+.login-screen,
+.desktop-screen {
   position: relative;
   z-index: 2;
   display: flex;
@@ -39,11 +40,11 @@
 }
 
 .profile-image {
-  width: 120px;
-  height: 120px;
+  width: 260px;
+  height: 300px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1), 0 4px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1), 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
 }
 
@@ -51,12 +52,13 @@
   font-size: 2.5rem;
   font-weight: 600;
   margin-bottom: 40px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   letter-spacing: 0.5px;
 }
 
 .action-container {
-  height: 80px; /* fixed height to prevent layout jumps */
+  height: 80px;
+  /* fixed height to prevent layout jumps */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,7 +81,7 @@
   background-color: rgba(255, 255, 255, 0.25);
   transform: scale(1.02);
   filter: brightness(1.1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .sign-in-button:active {
@@ -106,13 +108,13 @@
 .loading-text {
   font-size: 1.1rem;
   letter-spacing: 0.5px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .desktop-hello {
   font-size: 5rem;
   font-weight: 300;
-  text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .fade-in {
@@ -120,11 +122,21 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
