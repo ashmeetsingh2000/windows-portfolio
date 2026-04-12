@@ -1,0 +1,35 @@
+.lock-container {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 60px 80px;
+  overflow: hidden;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+}
+
+.lock-clock {
+  z-index: 2;
+  text-align: left;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.lock-time {
+  font-size: 6rem;
+  font-weight: 300;
+  margin: 0;
+  line-height: 1;
+}
+
+.lock-date {
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 12px 0 0 0;
+}

@@ -2,10 +2,10 @@ import React from 'react';
 import './DesktopScreen.css';
 
 const DesktopScreen = () => {
-  const bgPath = `${import.meta.env.BASE_URL}bgimage2.jpg`;
+  const bgPath = `${import.meta.env.BASE_URL}bgimage.webp`;
 
   return (
-    <div 
+    <div
       className="desktop-container"
       style={{ backgroundImage: `url(${bgPath})` }}
     >
