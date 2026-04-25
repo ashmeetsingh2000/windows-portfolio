@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import './LockScreen.css';
+import styles from './LockScreen.module.css';
 
 const LockScreen = ({ onUnlock, isActive }) => {
   const [time, setTime] = useState(new Date());
@@ -47,13 +47,13 @@ const LockScreen = ({ onUnlock, isActive }) => {
 
   return (
     <div
-      className="lock-container"
+      className={styles['lock-container']}
       style={{ backgroundImage: `url(${bgPath})` }}
       onClick={onUnlock}
     >
-      <div className="lock-clock">
-        <h1 className="lock-time">{timeString}</h1>
-        <h2 className="lock-date">{dateString}</h2>
+      <div className={styles['lock-clock']}>
+        <h1 className={styles['lock-time']}>{timeString}</h1>
+        <h2 className={styles['lock-date']}>{dateString}</h2>
       </div>
     </div>
   );

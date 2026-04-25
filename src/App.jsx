@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import LockScreen from './components/LockScreen';
-import LoginScreen from './components/LoginScreen';
-import DesktopScreen from './components/DesktopScreen';
-import MobileView from './components/MobileView';
+import LockScreen from './components/LockScreen/LockScreen';
+import LoginScreen from './components/LoginScreen/LoginScreen';
+import DesktopScreen from './components/DesktopScreen/DesktopScreen';
+import MobileView from './components/MobileView/MobileView';
 import './App.css';
 
 function App() {
