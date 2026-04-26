@@ -36,6 +36,10 @@ function App() {
     });
   }, []);
 
+  const handleLock = useCallback(() => {
+    setScreen('lock');
+  }, []);
+
   if (isMobile) {
     return <MobileView />;
   }
@@ -55,7 +59,7 @@ function App() {
       </div>
 
       <div className={`screen-layer ${isDesktopVisible ? 'layer-visible' : 'layer-hidden'}`}>
-        <DesktopScreen />
+        <DesktopScreen onLock={handleLock} />
       </div>
     </div>
   );
