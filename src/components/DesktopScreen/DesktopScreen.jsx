@@ -19,6 +19,15 @@ const DesktopScreen = ({ onLock }) => {
   const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0 });
 
   const openWindow = (id, title) => {
+    setWindowPositions(prev => {
+      if (!prev[id]) {
+        // Cascade offset based on number of opened windows to prevent perfect overlap
+        const offset = Object.keys(prev).length * 30;
+        return { ...prev, [id]: { x: offset, y: offset } };
+      }
+      return prev;
+    });
+
     setWindows(prev => {
       const existing = prev.find(w => w.id === id);
       const nextZ = highestZIndex + 1;
