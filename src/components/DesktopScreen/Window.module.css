@@ -16,6 +16,16 @@
   backdrop-filter: blur(12px); /* Glassmorphism */
 }
 
+.fullscreen {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0;
+  transform: none !important; /* Overrides Draggable translation */
+}
+
 .window.active {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 10px rgba(76, 194, 255, 0.15); /* Soft glow */
   border-color: rgba(255, 255, 255, 0.2); /* Brighter border */
@@ -47,11 +57,16 @@
   color: #e5e5e5;
 }
 
-.closeBtn {
+.windowControls {
+  display: flex;
+  height: 100%;
+}
+
+.controlBtn {
   background: transparent;
   border: none;
   width: 48px;
-  height: 36px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,6 +74,11 @@
   transition: background-color 0.2s, color 0.2s;
   font-size: 1rem;
   color: #aaa;
+}
+
+.controlBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 .closeBtn:hover {

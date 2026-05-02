@@ -163,7 +163,7 @@ const Taskbar = ({ windows, onTaskbarClick, onLock, onAppClick }) => {
             ))}
 
             {/* Running Windows Section */}
-            {windows.filter(w => !w.isClosed).map(win => {
+            {windows.filter(w => w.isOpen).map(win => {
               const appInfo = appRegistry.find(a => a.id === win.id);
               // Prevent duplication if app is pinned
               if (appInfo && appInfo.type === 'link') return null;
@@ -171,7 +171,7 @@ const Taskbar = ({ windows, onTaskbarClick, onLock, onAppClick }) => {
               return (
                 <div
                   key={win.id}
-                  className={`${styles.taskbarItem} ${win.isActive && win.isOpen ? styles.taskbarItemActive : ''}`}
+                  className={`${styles.taskbarItem} ${win.isActive && !win.isMinimized ? styles.taskbarItemActive : ''}`}
                   onClick={() => onTaskbarClick(win.id)}
                   title={win.title}
                 >

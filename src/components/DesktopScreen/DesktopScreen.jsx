@@ -36,12 +36,12 @@ const DesktopScreen = ({ onLock }) => {
         setHighestZIndex(nextZ);
         return prev.map(w =>
           w.id === id
-            ? { ...w, isOpen: true, isActive: true, isClosed: false, zIndex: nextZ }
+            ? { ...w, isOpen: true, isMinimized: false, isActive: true, zIndex: nextZ }
             : { ...w, isActive: false }
         );
       } else {
         setHighestZIndex(nextZ);
-        const newWin = { id, title, isOpen: true, isActive: true, isClosed: false, zIndex: nextZ };
+        const newWin = { id, title, isOpen: true, isMinimized: false, isFullscreen: false, isActive: true, zIndex: nextZ };
         return [...prev.map(w => ({ ...w, isActive: false })), newWin];
       }
     });
@@ -49,8 +49,29 @@ const DesktopScreen = ({ onLock }) => {
 
   const closeWindow = (id) => {
     setWindows(prev => prev.map(w =>
-      w.id === id ? { ...w, isOpen: false, isActive: false, isClosed: true } : w
+      w.id === id ? { ...w, isOpen: false, isActive: false } : w
     ));
+  };
+
+  const minimizeWindow = (id) => {
+    setWindows(prev => prev.map(w =>
+      w.id === id ? { ...w, isMinimized: true, isActive: false } : w
+    ));
+  };
+
+  const toggleFullscreen = (id) => {
+    setWindows(prev => {
+      const target = prev.find(w => w.id === id);
+      if (!target) return prev;
+      
+      const nextZ = highestZIndex + 1;
+      setHighestZIndex(nextZ);
+      return prev.map(w =>
+        w.id === id
+          ? { ...w, isFullscreen: !w.isFullscreen, isActive: true, zIndex: nextZ }
+          : { ...w, isActive: false }
+      );
+    });
   };
 
   const setActiveWindow = (id) => {
@@ -79,17 +100,17 @@ const DesktopScreen = ({ onLock }) => {
   const handleTaskbarClick = (id) => {
     setWindows(prev => {
       const target = prev.find(w => w.id === id);
-      if (target.isActive && target.isOpen) {
+      if (target.isActive && !target.isMinimized) {
         // Window is active and open -> minimize it
         return prev.map(w =>
-          w.id === id ? { ...w, isOpen: false, isActive: false } : w
+          w.id === id ? { ...w, isMinimized: true, isActive: false } : w
         );
       } else {
         // Window is inactive or minimized -> bring to front and active
         const nextZ = highestZIndex + 1;
         setHighestZIndex(nextZ);
         return prev.map(w =>
-          w.id === id ? { ...w, isOpen: true, isActive: true, zIndex: nextZ } : { ...w, isActive: false }
+          w.id === id ? { ...w, isMinimized: false, isActive: true, zIndex: nextZ } : { ...w, isActive: false }
         );
       }
     });
@@ -170,13 +191,15 @@ const DesktopScreen = ({ onLock }) => {
       <DesktopIcons apps={appRegistry} onAppOpen={handleAppClick} />
 
       {/* Render windows (hidden if not open to retain state) */}
-      {windows.map(win => (
+      {windows.map(win => win.isOpen && (
         <Window
           key={win.id}
           window={win}
           position={windowPositions[win.id]}
           onDragStop={handleDragStop}
           onClose={closeWindow}
+          onMinimize={minimizeWindow}
+          onToggleFullscreen={toggleFullscreen}
           onFocus={setActiveWindow}
         />
       ))}
