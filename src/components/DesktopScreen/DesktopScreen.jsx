@@ -15,6 +15,7 @@ const DesktopScreen = ({ onLock }) => {
 
   const [windows, setWindows] = useState([]);
   const [highestZIndex, setHighestZIndex] = useState(10);
+  const [windowPositions, setWindowPositions] = useState({});
   const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0 });
 
   const openWindow = (id, title) => {
@@ -83,6 +84,13 @@ const DesktopScreen = ({ onLock }) => {
         );
       }
     });
+  };
+
+  const handleDragStop = (id, data) => {
+    setWindowPositions(prev => ({
+      ...prev,
+      [id]: { x: data.x, y: data.y }
+    }));
   };
 
   const handleContextMenu = (e) => {
@@ -157,6 +165,8 @@ const DesktopScreen = ({ onLock }) => {
         <div key={win.id} style={{ display: win.isOpen ? 'block' : 'none' }}>
           <Window
             window={win}
+            position={windowPositions[win.id] || { x: 0, y: 0 }}
+            onDragStop={handleDragStop}
             onClose={closeWindow}
             onFocus={setActiveWindow}
           />

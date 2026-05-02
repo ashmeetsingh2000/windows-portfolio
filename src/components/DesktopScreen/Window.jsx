@@ -1,13 +1,21 @@
 import React from 'react';
+import Draggable from 'react-draggable';
 import styles from './Window.module.css';
 
-const Window = ({ window, onClose, onFocus }) => {
+const Window = ({ window, position, onDragStop, onClose, onFocus }) => {
   return (
-    <div 
-      className={`${styles.window} ${window.isActive ? styles.active : ''}`}
-      style={{ zIndex: window.zIndex }}
-      onClick={() => onFocus(window.id)}
+    <Draggable
+      handle={'.' + styles.titleBar}
+      bounds="parent"
+      position={position}
+      onStart={() => onFocus(window.id)}
+      onStop={(e, data) => onDragStop(window.id, data)}
     >
+      <div 
+        className={`${styles.window} ${window.isActive ? styles.active : ''}`}
+        style={{ zIndex: window.zIndex }}
+        onClick={() => onFocus(window.id)}
+      >
       <div className={styles.titleBar}>
         <span className={styles.title}>{window.title}</span>
         <button 
@@ -24,7 +32,9 @@ const Window = ({ window, onClose, onFocus }) => {
         {/* Content goes here eventually */}
         <p>Content for {window.title}</p>
       </div>
-    </div>
+        </div>
+      </div>
+    </Draggable>
   );
 };
 

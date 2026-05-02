@@ -30,6 +30,11 @@
   padding: 0 0 0 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   user-select: none;
+  cursor: grab;
+}
+
+.titleBar:active {
+  cursor: grabbing;
 }
 
 .window.active .titleBar {
