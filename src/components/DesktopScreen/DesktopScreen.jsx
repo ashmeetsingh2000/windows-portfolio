@@ -171,15 +171,14 @@ const DesktopScreen = ({ onLock }) => {
 
       {/* Render windows (hidden if not open to retain state) */}
       {windows.map(win => (
-        <div key={win.id} style={{ display: win.isOpen ? 'block' : 'none' }}>
-          <Window
-            window={win}
-            position={windowPositions[win.id] || { x: 0, y: 0 }}
-            onDragStop={handleDragStop}
-            onClose={closeWindow}
-            onFocus={setActiveWindow}
-          />
-        </div>
+        <Window
+          key={win.id}
+          window={win}
+          position={windowPositions[win.id]}
+          onDragStop={handleDragStop}
+          onClose={closeWindow}
+          onFocus={setActiveWindow}
+        />
       ))}
 
       {/* Taskbar Component */}

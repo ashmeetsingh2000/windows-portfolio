@@ -17,7 +17,10 @@ const Window = ({ window, position, onDragStop, onClose, onFocus }) => {
       <div
         ref={nodeRef}
         className={`${styles.window} ${window.isActive ? styles.active : ''}`}
-        style={{ zIndex: window.zIndex }}
+        style={{ 
+          zIndex: window.zIndex,
+          display: window.isOpen ? undefined : 'none'
+        }}
         onClick={() => onFocus(window.id)}
       >
         <div className={styles.titleBar}>
