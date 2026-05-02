@@ -1,7 +1,12 @@
 import styles from './LoginScreen.module.css';
-
+import { useState, useEffect } from 'react';
+import { WALLPAPERS } from '../../config/wallpapers';
 const LoginScreen = ({ screen, onSignIn }) => {
-  const bgPath = `${import.meta.env.BASE_URL}bgimage2.jpg`;
+  const [bgPath, setBgPath] = useState('');
+  useEffect(() => {
+    const index = Math.floor(Math.random() * WALLPAPERS.length);
+    setBgPath(`${import.meta.env.BASE_URL}${WALLPAPERS[index]}`);
+  }, []);
   const profilePath = `${import.meta.env.BASE_URL}profile2.jpg`;
 
   return (
