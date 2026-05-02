@@ -1,9 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './LockScreen.module.css';
+import { WALLPAPERS } from '../../config/wallpapers';
 
 const LockScreen = ({ onUnlock, isActive }) => {
   const [time, setTime] = useState(new Date());
   const timerRef = useRef(null);
+  const [bgPath, setBgPath] = useState('');
+
+  useEffect(() => {
+    const index = Math.floor(Math.random() * WALLPAPERS.length);
+    setBgPath(`${import.meta.env.BASE_URL}${WALLPAPERS[index]}`);
+  }, []);
 
   // Only run the clock when this screen is active
   useEffect(() => {
@@ -32,7 +39,6 @@ const LockScreen = ({ onUnlock, isActive }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isActive, onUnlock]);
 
-  const bgPath = `${import.meta.env.BASE_URL}bgimage2.jpg`;
 
   const timeString = time.toLocaleTimeString([], {
     hour: 'numeric',

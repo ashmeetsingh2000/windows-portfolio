@@ -38,6 +38,7 @@ export const appRegistry = [
     id: 'linkedin',
     title: 'LinkedIn',
     type: 'link',
+    iconPath: 'linkedin.png',
     icon: '🔗',
     action: () => window.open('https://www.linkedin.com/in/ashmeet-singh-907460163/', '_blank'),
   },
@@ -45,7 +46,7 @@ export const appRegistry = [
     id: 'gmail',
     title: 'Gmail',
     type: 'link',
-    icon: '📧',
-    action: () => window.open('mailto:singhashmeet75@gmail.com?subject=Hello%20Ashmeet', '_blank'),
+    iconPath: 'gmail.png',
+    action: () => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=singhashmeet75@gmail.com&su=Hello%20Ashmeet', '_blank'),
   }
 ];

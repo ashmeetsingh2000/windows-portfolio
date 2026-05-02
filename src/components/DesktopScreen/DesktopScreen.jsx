@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styles from './DesktopScreen.module.css';
 import Window from './Window';
 import Taskbar from './Taskbar';
 import DesktopIcons from './DesktopIcons';
+import DesktopContextMenu from './DesktopContextMenu';
 import { appRegistry } from '../../config/apps';
+import { WALLPAPERS } from '../../config/wallpapers';
 
 const DesktopScreen = ({ onLock }) => {
-  const bgPath = `${import.meta.env.BASE_URL}bgimage.jpg`;
+  const [bgIndex, setBgIndex] = useState(() => Math.floor(Math.random() * WALLPAPERS.length));
+  const [isFading, setIsFading] = useState(false);
+  const bgPath = `${import.meta.env.BASE_URL}${WALLPAPERS[bgIndex]}`;
+  const intervalRef = useRef(null);
 
   const [windows, setWindows] = useState([]);
   const [highestZIndex, setHighestZIndex] = useState(10);
+  const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0 });
 
   const openWindow = (id, title) => {
     setWindows(prev => {
@@ -79,11 +85,69 @@ const DesktopScreen = ({ onLock }) => {
     });
   };
 
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+    setContextMenu({
+      isOpen: true,
+      x: e.pageX,
+      y: e.pageY,
+    });
+  };
+
+  const handleCloseContextMenu = () => {
+    setContextMenu({ ...contextMenu, isOpen: false });
+  };
+
+  const handleRefresh = () => {
+    // Visual placebo
+  };
+
+  const handleCloseAll = () => {
+    setWindows(prev => prev.map(w => ({ ...w, isOpen: false, isActive: false, isClosed: true })));
+  };
+
+  const changeWallpaper = useCallback(() => {
+    setIsFading(true);
+    setTimeout(() => {
+      setBgIndex(prev => {
+        let nextIndex;
+        do {
+          nextIndex = Math.floor(Math.random() * WALLPAPERS.length);
+        } while (nextIndex === prev && WALLPAPERS.length > 1);
+        return nextIndex;
+      });
+      setIsFading(false);
+    }, 400); // 400ms fade duration
+  }, []);
+
+  const startWallpaperInterval = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      changeWallpaper();
+    }, 10000);
+  }, [changeWallpaper]);
+
+  useEffect(() => {
+    startWallpaperInterval();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [startWallpaperInterval]);
+
+  const handleNextWallpaper = useCallback(() => {
+    changeWallpaper();
+    startWallpaperInterval();
+  }, [changeWallpaper, startWallpaperInterval]);
+
   return (
     <div
       className={styles['desktop-container']}
-      style={{ backgroundImage: `url(${bgPath})` }}
+      onContextMenu={handleContextMenu}
     >
+      <div
+        className={`${styles['desktop-background']} ${isFading ? styles['fade-out'] : ''}`}
+        style={{ backgroundImage: `url(${bgPath})` }}
+      />
       <div className={styles['desktop-overlay']} />
 
       <DesktopIcons apps={appRegistry} onAppOpen={handleAppClick} />
@@ -101,6 +165,16 @@ const DesktopScreen = ({ onLock }) => {
 
       {/* Taskbar Component */}
       <Taskbar windows={windows} onTaskbarClick={handleTaskbarClick} onLock={onLock} onAppClick={handleAppClick} />
+
+      {contextMenu.isOpen && (
+        <DesktopContextMenu
+          position={{ x: contextMenu.x, y: contextMenu.y }}
+          onClose={handleCloseContextMenu}
+          onRefresh={handleRefresh}
+          onCloseAll={handleCloseAll}
+          onNextWallpaper={handleNextWallpaper}
+        />
+      )}
     </div>
   );
 };
