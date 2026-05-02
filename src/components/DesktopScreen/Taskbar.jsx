@@ -187,6 +187,9 @@ const Taskbar = ({ windows, onTaskbarClick, onLock, onAppClick }) => {
                       {appInfo ? appInfo.icon : '🗔'}
                     </div>
                   </div>
+                  {win.isOpen && win.isMinimized && (
+                    <div className={styles.minimizedIndicator} />
+                  )}
                 </div>
               );
             })}
