@@ -1,0 +1,121 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 1rem 1.5rem 3rem 1.5rem;
+  color: #fff;
+  font-family: inherit;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.profileSection {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.imageContainer {
+  flex-shrink: 0;
+}
+
+.profileImage {
+  width: 280px;
+  height: 280px;
+  border-radius: 24px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.name {
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+}
+
+.intro {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  line-height: 1.5;
+  margin-top: 0.2rem;
+}
+
+.aboutSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sectionHeader {
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.paragraph {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.tagGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.tag {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+}
+
+.tag:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Responsive adjustments for window resizing */
+@media (max-width: 500px) {
+  .profileSection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .container {
+    padding: 1.25rem;
+  }
+}

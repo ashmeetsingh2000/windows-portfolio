@@ -1,10 +1,12 @@
+import DesktopAbout from '../components/DesktopScreen/DesktopAbout';
+
 export const appRegistry = [
   {
     id: 'about',
     title: 'About',
     type: 'window',
     icon: '👤',
-    component: null, // Placeholder for future React components
+    component: DesktopAbout,
   },
   {
     id: 'experience',

@@ -1,11 +1,15 @@
 import React, { useRef } from 'react';
 import Draggable from 'react-draggable';
 import styles from './Window.module.css';
+import { appRegistry } from '../../config/apps';
 
 const Window = ({ window, position, onDragStop, onClose, onMinimize, onToggleFullscreen, onFocus }) => {
   const nodeRef = useRef(null);
 
   if (window.isMinimized) return null;
+
+  const appConfig = appRegistry.find(app => app.id === window.id);
+  const AppComponent = appConfig ? appConfig.component : null;
 
   return (
     <Draggable
@@ -59,8 +63,7 @@ const Window = ({ window, position, onDragStop, onClose, onMinimize, onToggleFul
           </div>
         </div>
         <div className={styles.content}>
-          {/* Content goes here eventually */}
-          <p>Content for {window.title}</p>
+          {AppComponent ? <AppComponent /> : <p>Content for {window.title}</p>}
         </div>
       </div>
     </Draggable>
