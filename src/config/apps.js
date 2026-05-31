@@ -1,4 +1,5 @@
 import DesktopAbout from '../components/DesktopScreen/DesktopAbout';
+import DesktopCertifications from '../components/DesktopScreen/DesktopCertifications';
 
 export const appRegistry = [
   {
@@ -27,7 +28,7 @@ export const appRegistry = [
     title: 'Certifications',
     type: 'window',
     icon: '📜',
-    component: null,
+    component: DesktopCertifications,
   },
   {
     id: 'projects',

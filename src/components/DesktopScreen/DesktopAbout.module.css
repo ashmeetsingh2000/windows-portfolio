@@ -1,12 +1,19 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
   padding: 1rem 1.5rem 3rem 1.5rem;
   color: #fff;
   font-family: inherit;
   min-height: 100%;
   box-sizing: border-box;
+}
+
+.contentWrapper {
+  width: 100%;
+  max-width: 1700px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
 .profileSection {
