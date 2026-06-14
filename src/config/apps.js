@@ -1,5 +1,7 @@
 import DesktopAbout from '../components/DesktopScreen/DesktopAbout';
 import DesktopCertifications from '../components/DesktopScreen/DesktopCertifications';
+import DesktopSkills from '../components/DesktopScreen/DesktopSkills';
+import DesktopExperience from '../components/DesktopScreen/DesktopExperience';
 
 export const appRegistry = [
   {
@@ -14,21 +16,7 @@ export const appRegistry = [
     title: 'Work Experience',
     type: 'window',
     icon: '💼',
-    component: null,
-  },
-  {
-    id: 'skills',
-    title: 'Skills',
-    type: 'window',
-    icon: '🛠️',
-    component: null,
-  },
-  {
-    id: 'certifications',
-    title: 'Certifications',
-    type: 'window',
-    icon: '📜',
-    component: DesktopCertifications,
+    component: DesktopExperience,
   },
   {
     id: 'projects',
@@ -36,6 +24,20 @@ export const appRegistry = [
     type: 'window',
     icon: '🚀',
     component: null,
+  },
+  {
+    id: 'skills',
+    title: 'Skills',
+    type: 'window',
+    icon: '🛠️',
+    component: DesktopSkills,
+  },
+  {
+    id: 'certifications',
+    title: 'Certifications',
+    type: 'window',
+    icon: '📜',
+    component: DesktopCertifications,
   },
   {
     id: 'linkedin',

@@ -63,10 +63,15 @@ This project is a highly polished, interactive portfolio website designed to mim
     3. Front End Development Libraries (freeCodeCamp - November 2021)
     4. Data Visualization (freeCodeCamp - December 2022)
     5. The Ultimate Job Ready Data Science Course (CodeWithHarry - October 2025)
+- **Work Experience Window**:
+  - Built a fully functional two-panel Work Experience application interface registered in `appRegistry`.
+  - Left navigation allows selecting between different roles, with glassmorphism hover and active states.
+  - Right content panel displays role header, professional summary, detailed responsibilities, and lightweight explorer-style project lists.
+  - Fully responsive, stacking navigation into a scrollbar or column on narrower screen sizes.
 
 # Work In Progress / TODO
 
-- **Content Integration**: Transition remaining placeholder components (e.g., Work Experience, Projects, Skills) inside the active Windows to load dynamic, real portfolio data.
+- **Content Integration**: Transition remaining placeholder components (e.g., Projects, Skills) inside the active Windows to load dynamic, real portfolio data.
 - **Mobile View Enhancements**: Refine `MobileView.jsx` to map the App Registry links smoothly for `< 400px` screen widths where full windowing is disabled.
 
 # Window Implementation Progress & Roadmap
@@ -74,7 +79,7 @@ This project is a highly polished, interactive portfolio website designed to mim
 Priority order:
 - **About** ✅
 - **Certifications** ✅
-- **Work Experience** ⏳ *(Next Planned Window)*
+- **Work Experience** ✅
 - **Projects** ⏳ *(Next Planned Window)*
 - **Skills** ⏳ *(Next Planned Window)*
 
