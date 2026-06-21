@@ -2,6 +2,7 @@ import DesktopAbout from '../components/DesktopScreen/DesktopAbout';
 import DesktopCertifications from '../components/DesktopScreen/DesktopCertifications';
 import DesktopSkills from '../components/DesktopScreen/DesktopSkills';
 import DesktopExperience from '../components/DesktopScreen/DesktopExperience';
+import DesktopProjects from '../components/DesktopScreen/DesktopProjects';
 
 export const appRegistry = [
   {
@@ -23,7 +24,7 @@ export const appRegistry = [
     title: 'Projects',
     type: 'window',
     icon: '🚀',
-    component: null,
+    component: DesktopProjects,
   },
   {
     id: 'skills',

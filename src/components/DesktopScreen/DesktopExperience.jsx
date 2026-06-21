@@ -21,6 +21,7 @@ const DesktopExperience = () => {
                 className={`${styles.navItem} ${activeTab === exp.id ? styles.activeNavItem : ''}`}
                 onClick={() => setActiveTab(exp.id)}
               >
+                <span className={styles.navDuration}>{exp.duration}</span>
                 <span className={styles.navRole}>{exp.role}</span>
                 {exp.company && <span className={styles.navCompany}>{exp.company}</span>}
               </button>

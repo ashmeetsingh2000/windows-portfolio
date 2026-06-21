@@ -13,65 +13,76 @@ This project is a highly polished, interactive portfolio website designed to mim
 
 - `/public`: Contains static assets (backgrounds, profile pictures, icons, PDF certificates).
 - `/src`: Main application source code.
-  - `/src/components`: Contains UI components organized by screens (e.g., `LockScreen/`, `LoginScreen/`, `DesktopScreen/`).
-  - `/src/config`: Configuration files (e.g., `apps.js` for the App Registry).
-  - `App.jsx`: The root component orchestrating state transitions (`lock`, `login`, `loading`, `desktop`).
+-   `/src/components`: Contains UI components organized by screens (e.g., `LockScreen/`, `LoginScreen/`, `DesktopScreen/`).
+-   `/src/config`: Configuration files (e.g., `apps.js` for the App Registry).
+-   `App.jsx`: The root component orchestrating state transitions (`lock`, `login`, `loading`, `desktop`).
 
 # Architecture & Systems
 
 - **App Registry (`apps.js`)**: A centralized source of truth defining all apps.
-  - Apps support `window` (renders an interactive window) and `link` (executes external actions like opening LinkedIn or Gmail) types.
+    - Apps support `window` (renders an interactive window) and `link` (executes external actions like opening LinkedIn or Gmail) types.
 - **Window Management System**: Centralized state within `DesktopScreen.jsx` tracking open windows (`isOpen`, `isMinimized`, `isFullscreen`, `isActive`, `zIndex`).
-  - **Lifecycle**: Windows are fully unmounted from the DOM when closed. Minimizing a window hides it but keeps it mounted. Fullscreen toggle allows windows to snap to full desktop bounds (no resize support).
-  - **Draggable**: Windows are draggable via the title bar with strict boundary constraints. The system utilizes `react-draggable` in uncontrolled mode (`defaultPosition`) to ensure high-performance dragging. Dragging is automatically disabled in fullscreen mode. Window positions are securely managed and cascaded in state. Z-index dynamically updates on focus and drag.
+    - **Lifecycle**: Windows are fully unmounted from the DOM when closed. Minimizing a window hides it but keeps it mounted. Fullscreen toggle allows windows to snap to full desktop bounds (no resize support).
+    - **Draggable**: Windows are draggable via the title bar with strict boundary constraints. The system utilizes `react-draggable` in uncontrolled mode (`defaultPosition`) to ensure high-performance dragging. Dragging is automatically disabled in fullscreen mode. Window positions are securely managed and cascaded in state. Z-index dynamically updates on focus and drag.
 - **Taskbar System**:
-  - **Left Section**: Features a custom SVG Start button and dynamically maps Pinned Apps (external links) followed by running Windows.
-  - **Right Section**: Contains a live updating clock and date display.
-  - **Indicators**: Taskbar items reflect states visually: active windows have a colored highlight, and minimized windows show a subtle bottom underline indicator.
-  - **Click Behavior**: Clicking a taskbar icon restores minimized windows, minimizes active windows, and brings inactive windows to the front.
+    - **Left Section**: Features a custom SVG Start button and dynamically maps Pinned Apps (external links) followed by running Windows.
+    - **Right Section**: Contains a live updating clock and date display.
+    - **Indicators**: Taskbar items reflect states visually: active windows have a colored highlight, and minimized windows show a subtle bottom underline indicator.
+    - **Click Behavior**: Clicking a taskbar icon restores minimized windows, minimizes active windows, and brings inactive windows to the front.
 - **Desktop Icons**: Rendered via a dedicated `DesktopIcons` component mapping over the App Registry with single-click select and double-click open behaviors.
 - **Start Menu Grid**: Toggled from the Taskbar, displaying a Windows 11 style grid of all available apps with outside-click and ESC key closure behavior.
 - **Wallpaper System**: Centralized shared wallpaper configuration array.
-  - **Desktop**: Features a random wallpaper on load, auto wallpaper rotation every 10 seconds, and manual "Next Wallpaper" functionality that correctly resets the auto-rotation timer.
-  - **Lock Screen**: Selects a fresh random wallpaper on each mount (no auto-rotation).
+    - **Desktop**: Features a random wallpaper on load, auto wallpaper rotation every 10 seconds, and manual "Next Wallpaper" functionality that correctly resets the auto-rotation timer.
+    - **Lock Screen**: Selects a fresh random wallpaper on each mount (no auto-rotation).
 - **Desktop Interactions**:
-  - **Context Menu**: Custom Windows-style right-click context menu offering actions like 'Refresh' (visual only), 'Close All Windows', and 'Next Wallpaper'.
-  - **UX Restrictions**: Default browser context menus are globally disabled. Common DevTools keyboard shortcuts (F12, Ctrl+Shift+I/J/C) are blocked at the UX level to discourage casual inspection and prioritize the custom OS environment.
+    - **Context Menu**: Custom Windows-style right-click context menu offering actions like 'Refresh' (visual only), 'Close All Windows', and 'Next Wallpaper'.
+    - **UX Restrictions**: Default browser context menus are globally disabled. Common DevTools keyboard shortcuts (F12, Ctrl+Shift+I/J/C) are blocked at the UX level to discourage casual inspection and prioritize the custom OS environment.
 - **Content Width Strategy**:
-  - Introduced a centered content wrapper pattern (`.contentWrapper`) applied across window contents to constrain maximum reading/layout width to `1700px`.
-  - Centers content automatically on ultra-wide and high-resolution monitors to prevent overly stretched text and cards.
-  - Windows remain fully resizable and responsive, keeping the outer OS desktop experience completely native.
+    - Introduced a centered content wrapper pattern (`.contentWrapper`) applied across window contents to constrain maximum reading/layout width to `1700px`.
+    - Centers content automatically on ultra-wide and high-resolution monitors to prevent overly stretched text and cards.
+    - Windows remain fully resizable and responsive, keeping the outer OS desktop experience completely native.
 
 # Features Implemented
 
 - **Seamless Transitions**: Fluid animations between Lock Screen, Login Screen, and Desktop environments using CSS layers.
 - **System Polish**: 
-  - **Glassmorphism**: High-quality dark theme implementation relying on `rgba()` transparencies and `backdrop-filter: blur` to achieve modern OS aesthetics consistency.
-  - **Improved UX**: Realistic OS behaviors including minimizing, maximizing, drag limits, and taskbar indicators.
-  - **Performance**: Improved heavily by utilizing uncontrolled drag positions and fully unmounting closed windows to maintain a clean DOM tree.
+    - **Glassmorphism**: High-quality dark theme implementation relying on `rgba()` transparencies and `backdrop-filter: blur` to achieve modern OS aesthetics consistency.
+    - **Improved UX**: Realistic OS behaviors including minimizing, maximizing, drag limits, and taskbar indicators.
+    - **Performance**: Improved heavily by utilizing uncontrolled drag positions and fully unmounting closed windows to maintain a clean DOM tree.
 - **About Window**:
-  - Expanded content highlighting full-stack systems, backend architecture, desktop apps, and system integrations.
-  - Organizes developer profile information with focused segments: Profile, Focus Areas, Currently Exploring, Technical Domains, and Technology Stack.
+    - Expanded content highlighting full-stack systems, backend architecture, desktop apps, and system integrations.
+    - Organizes developer profile information with focused segments: Profile, Focus Areas, Currently Exploring, Technical Domains, and Technology Stack.
 - **Certifications Window**:
-  - Built a fully operational document explorer interface (`DesktopCertifications`) registered in `appRegistry`.
-  - Implemented responsive glassmorphic certificate cards featuring provider badges, metadata, comprehensive outcomes, and tech tags.
-  - Configured automatic chronological sorting (newest first) based on issuance dates.
-  - Supports external verification links and local PDF downloads (e.g. `Data-Science-Course-Certificate.pdf`).
-  - Completed Milestones:
-    1. Responsive Web Design (freeCodeCamp - September 2021)
-    2. JavaScript Algorithms and Data Structures (freeCodeCamp - October 2021)
-    3. Front End Development Libraries (freeCodeCamp - November 2021)
-    4. Data Visualization (freeCodeCamp - December 2022)
-    5. The Ultimate Job Ready Data Science Course (CodeWithHarry - October 2025)
+    - Built a fully operational document explorer interface (`DesktopCertifications`) registered in `appRegistry`.
+    - Implemented responsive glassmorphic certificate cards featuring provider badges, metadata, comprehensive outcomes, and tech tags.
+    - Configured automatic chronological sorting (newest first) based on issuance dates.
+    - Supports external verification links and local PDF downloads.
 - **Work Experience Window**:
-  - Built a fully functional two-panel Work Experience application interface registered in `appRegistry`.
-  - Left navigation allows selecting between different roles, with glassmorphism hover and active states.
-  - Right content panel displays role header, professional summary, detailed responsibilities, and lightweight explorer-style project lists.
-  - Fully responsive, stacking navigation into a scrollbar or column on narrower screen sizes.
+    - Built a fully functional two-panel Work Experience application interface registered in `appRegistry`.
+    - Left navigation allows selecting between different roles, displaying durations and roles with glassmorphism hover and active states.
+    - Right content panel displays role header, professional summary, detailed responsibilities, and lightweight explorer-style project lists.
+    - Fully responsive, stacking navigation into a scrollbar or column on narrower screen sizes.
+- **Projects Window**:
+    - Built a fully functional projects explorer component (`DesktopProjects.jsx`) populated with real, dynamic projects data.
+    - Features a dual-panel layout similar to the Work Experience window: a left explorer sidebar grouped by company, and a right detail area.
+    - Features an optional, responsive "Links" section rendering compact, glassmorphic clickable pills/tags targeting external project URLs (opens in a new tab with `target="_blank"` and `rel="noopener noreferrer"`).
+    - Preserves design language using existing colors, spacing, typography, borders, and subtle translateY hover animations.
+
+# Portfolio Content Overhaul & Positioning
+
+A major content overhaul was performed to reposition the portfolio and improve recruiter readability:
+- **Systems Engineering Positioning**: Transitioned the portfolio from a generic Full Stack Developer presentation toward a specialized **Full Stack Systems Engineer** positioning.
+- **Key Focus Areas Highlighted**: Explicitly highlighted hands-on engineering across:
+    - **AI Systems & RAG Applications** (e.g. *Furniture Intelligence Search Platform* using FastAPI, PostgreSQL, pgvector, and LLMs).
+    - **Real-Time Monitoring Platforms & Data Pipelines** (e.g. *Real-Time Infrastructure Monitoring Platform* built using Node.js and Redis Streams for high-throughput metric aggregation).
+    - **Desktop Applications** (e.g. Electron-based control consoles and automation platforms).
+    - **Backend Services & Multi-platform Web Development**.
+- **Defensibility & Realism**: Reviewed and refined all project summaries, responsibilities, and metrics to eliminate exaggerated claims and focus on technically accurate, interview-defensible descriptions.
+- **Freelance Consolidation**: Consolidated multiple separate freelance websites into a single, high-impact **Multi-Platform Client Websites** project profile featuring a unified links list to optimize readability.
 
 # Work In Progress / TODO
 
-- **Content Integration**: Transition remaining placeholder components (e.g., Projects, Skills) inside the active Windows to load dynamic, real portfolio data.
+- **Content Integration**: Transition remaining placeholder components (e.g., Skills) inside the active Windows to load dynamic, real portfolio data.
 - **Mobile View Enhancements**: Refine `MobileView.jsx` to map the App Registry links smoothly for `< 400px` screen widths where full windowing is disabled.
 
 # Window Implementation Progress & Roadmap
@@ -80,7 +91,7 @@ Priority order:
 - **About** ✅
 - **Certifications** ✅
 - **Work Experience** ✅
-- **Projects** ⏳ *(Next Planned Window)*
+- **Projects** ✅
 - **Skills** ⏳ *(Next Planned Window)*
 
 # Notes for Future Development

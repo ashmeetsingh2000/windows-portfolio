@@ -35,7 +35,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(15, 15, 15, 0.4);
+  background-color: rgba(15, 15, 15, 0.2);
   z-index: 1;
 }
 
@@ -106,7 +106,8 @@
 .desktopIconsArea {
   position: absolute;
   top: 20px;
-  left: 260px; /* Right of the sidebar */
+  left: 260px;
+  /* Right of the sidebar */
   bottom: 60px;
   display: flex;
   flex-direction: column;

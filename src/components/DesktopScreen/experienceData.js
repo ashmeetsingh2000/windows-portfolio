@@ -51,7 +51,7 @@ const experienceData = [
   {
     id: 3,
     role: "Frontend Web Developer",
-    company: "",
+    company: "SSRA Consulting Pvt. Ltd",
     duration: "September 2021 - June 2022",
     location: "Delhi, India",
     summary:
