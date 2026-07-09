@@ -1,10 +1,10 @@
 export const WALLPAPERS = [
-  'wallpaper/1.jpg',
-  'wallpaper/3.jpg',
-  'wallpaper/4.jpg',
-  'wallpaper/5.jpg',
-  'wallpaper/6.jpg',
+  'wallpaper/1.webp',
+  'wallpaper/3.webp',
+  'wallpaper/4.webp',
+  'wallpaper/5.webp',
+  'wallpaper/6.webp',
   'wallpaper/7.webp',
-  'wallpaper/8.jpg',
+  'wallpaper/8.webp',
   'wallpaper/9.webp'
 ];
