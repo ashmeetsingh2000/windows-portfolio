@@ -26,6 +26,8 @@ const Window = ({ window, position, onDragStop, onClose, onMinimize, onToggleFul
         className={`${styles.window} ${window.isActive ? styles.active : ''} ${window.isFullscreen ? styles.fullscreen : ''}`}
         style={{ zIndex: window.zIndex }}
         onClick={() => onFocus(window.id)}
+        role="dialog"
+        aria-label={`${window.title} Window`}
       >
         <div className={styles.titleBar}>
           <span className={styles.title}>{window.title}</span>
@@ -37,6 +39,7 @@ const Window = ({ window, position, onDragStop, onClose, onMinimize, onToggleFul
                 onMinimize(window.id);
               }}
               title="Minimize"
+              aria-label={`Minimize ${window.title} Window`}
             >
               _
             </button>
@@ -46,7 +49,8 @@ const Window = ({ window, position, onDragStop, onClose, onMinimize, onToggleFul
                 e.stopPropagation();
                 onToggleFullscreen(window.id);
               }}
-              title="Maximize"
+              title={window.isFullscreen ? "Restore" : "Maximize"}
+              aria-label={window.isFullscreen ? `Restore ${window.title} Window size` : `Maximize ${window.title} Window`}
             >
               {window.isFullscreen ? '❐' : '□'}
             </button>
@@ -57,6 +61,7 @@ const Window = ({ window, position, onDragStop, onClose, onMinimize, onToggleFul
                 onClose(window.id);
               }}
               title="Close"
+              aria-label={`Close ${window.title} Window`}
             >
               X
             </button>

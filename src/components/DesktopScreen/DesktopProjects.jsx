@@ -39,27 +39,35 @@ const DesktopProjects = () => {
 
         <div className={styles.layoutGrid}>
           {/* Left Explorer Navigation Panel */}
-          <div className={styles.sidebar}>
+          <div className={styles.sidebar} role="navigation" aria-label="Projects Explorer">
             {projectsData.map((group) => {
               const isExpanded = expandedCompany === group.company;
+              const groupId = `projects-group-${group.company.replace(/\s+/g, '-')}`;
               return (
                 <div key={group.company} className={styles.groupContainer}>
                   <button
                     className={styles.groupHeader}
                     onClick={() => handleCompanyHeaderClick(group.company)}
+                    aria-expanded={isExpanded}
+                    aria-controls={groupId}
                   >
                     <span className={`${styles.chevron} ${isExpanded ? styles.chevronExpanded : ''}`}>
                       ▶
                     </span>
                     <span className={styles.groupTitle}>{group.company}</span>
                   </button>
-
-                  <div className={`${styles.projectList} ${isExpanded ? styles.expanded : styles.collapsed}`}>
+ 
+                  <div 
+                    id={groupId}
+                    className={`${styles.projectList} ${isExpanded ? styles.expanded : styles.collapsed}`}
+                    aria-hidden={!isExpanded}
+                  >
                     {group.projects.map((proj) => (
                       <button
                         key={proj.id}
                         className={`${styles.projectNavItem} ${activeProjectId === proj.id ? styles.activeProjectNavItem : ''}`}
                         onClick={() => setActiveProjectId(proj.id)}
+                        aria-current={activeProjectId === proj.id ? "true" : "false"}
                       >
                         <span className={styles.projectBullet}>•</span>
                         <span className={styles.projectNameLink}>{proj.title}</span>

@@ -51,19 +51,52 @@ const DesktopContextMenu = ({ position, onClose, onRefresh, onCloseAll, onNextWa
     left: adjustedPosition.x,
   };
 
+  const handleKeyDown = (e, action) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      action();
+      onClose();
+    }
+  };
+
   return (
-    <div ref={menuRef} className={styles.contextMenu} style={menuStyle} onContextMenu={(e) => e.preventDefault()}>
-      <div className={styles.menuItem} onClick={() => { onRefresh(); onClose(); }}>
+    <div 
+      ref={menuRef} 
+      className={styles.contextMenu} 
+      style={menuStyle} 
+      onContextMenu={(e) => e.preventDefault()}
+      role="menu"
+      aria-label="Desktop Context Menu"
+    >
+      <div 
+        className={styles.menuItem} 
+        onClick={() => { onRefresh(); onClose(); }}
+        onKeyDown={(e) => handleKeyDown(e, onRefresh)}
+        role="menuitem"
+        tabIndex={0}
+      >
         <span className={styles.menuIcon}>🔄</span>
         <span>Refresh</span>
       </div>
       <div className={styles.menuDivider}></div>
-      <div className={styles.menuItem} onClick={() => { onCloseAll(); onClose(); }}>
+      <div 
+        className={styles.menuItem} 
+        onClick={() => { onCloseAll(); onClose(); }}
+        onKeyDown={(e) => handleKeyDown(e, onCloseAll)}
+        role="menuitem"
+        tabIndex={0}
+      >
         <span className={styles.menuIcon}>❌</span>
         <span>Close All Windows</span>
       </div>
       <div className={styles.menuDivider}></div>
-      <div className={styles.menuItem} onClick={() => { onNextWallpaper(); onClose(); }}>
+      <div 
+        className={styles.menuItem} 
+        onClick={() => { onNextWallpaper(); onClose(); }}
+        onKeyDown={(e) => handleKeyDown(e, onNextWallpaper)}
+        role="menuitem"
+        tabIndex={0}
+      >
         <span className={styles.menuIcon}>🖼️</span>
         <span>Next Wallpaper</span>
       </div>

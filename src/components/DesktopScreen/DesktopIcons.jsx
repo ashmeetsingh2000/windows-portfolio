@@ -14,6 +14,14 @@ const DesktopIcons = ({ apps, onAppOpen }) => {
     setSelectedId(null);
   };
 
+  const handleKeyDown = (e, app) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onAppOpen(app);
+      setSelectedId(null);
+    }
+  };
+
   const handleBackgroundClick = () => {
     setSelectedId(null);
   };
@@ -26,6 +34,10 @@ const DesktopIcons = ({ apps, onAppOpen }) => {
           className={`${styles.iconWrapper} ${selectedId === app.id ? styles.selected : ''}`}
           onClick={(e) => handleClick(e, app.id)}
           onDoubleClick={() => handleDoubleClick(app)}
+          onKeyDown={(e) => handleKeyDown(e, app)}
+          role="button"
+          tabIndex={0}
+          aria-label={`Open ${app.title}`}
         >
            <div className={styles.iconImage}>
              {app.iconPath ? (

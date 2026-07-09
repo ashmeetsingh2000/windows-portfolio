@@ -56,6 +56,9 @@ const LockScreen = ({ onUnlock, isActive }) => {
       className={styles['lock-container']}
       style={{ backgroundImage: `url(${bgPath})` }}
       onClick={onUnlock}
+      role="button"
+      tabIndex={0}
+      aria-label="Lock screen. Click or press any key to unlock."
     >
       <div className={styles['lock-clock']}>
         <h1 className={styles['lock-time']}>{timeString}</h1>

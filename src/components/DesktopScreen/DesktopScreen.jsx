@@ -7,6 +7,17 @@ import DesktopContextMenu from './DesktopContextMenu';
 import { appRegistry } from '../../config/apps';
 import { WALLPAPERS } from '../../config/wallpapers';
 
+const getNextZIndex = (windowsList) => {
+  let maxZ = 10;
+  for (let i = 0; i < windowsList.length; i++) {
+    const w = windowsList[i];
+    if (w.isOpen && w.zIndex > maxZ) {
+      maxZ = w.zIndex;
+    }
+  }
+  return maxZ + 1;
+};
+
 const DesktopScreen = ({ onLock }) => {
   const [bgIndex, setBgIndex] = useState(() => Math.floor(Math.random() * WALLPAPERS.length));
   const [isFading, setIsFading] = useState(false);
@@ -14,7 +25,6 @@ const DesktopScreen = ({ onLock }) => {
   const intervalRef = useRef(null);
 
   const [windows, setWindows] = useState([]);
-  const [highestZIndex, setHighestZIndex] = useState(10);
   const [windowPositions, setWindowPositions] = useState({});
   const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0 });
 
@@ -30,17 +40,15 @@ const DesktopScreen = ({ onLock }) => {
 
     setWindows(prev => {
       const existing = prev.find(w => w.id === id);
-      const nextZ = highestZIndex + 1;
+      const nextZ = getNextZIndex(prev);
 
       if (existing) {
-        setHighestZIndex(nextZ);
         return prev.map(w =>
           w.id === id
             ? { ...w, isOpen: true, isMinimized: false, isActive: true, zIndex: nextZ }
             : { ...w, isActive: false }
         );
       } else {
-        setHighestZIndex(nextZ);
         const newWin = { id, title, isOpen: true, isMinimized: false, isFullscreen: false, isActive: true, zIndex: nextZ };
         return [...prev.map(w => ({ ...w, isActive: false })), newWin];
       }
@@ -64,8 +72,7 @@ const DesktopScreen = ({ onLock }) => {
       const target = prev.find(w => w.id === id);
       if (!target) return prev;
       
-      const nextZ = highestZIndex + 1;
-      setHighestZIndex(nextZ);
+      const nextZ = getNextZIndex(prev);
       return prev.map(w =>
         w.id === id
           ? { ...w, isFullscreen: !w.isFullscreen, isActive: true, zIndex: nextZ }
@@ -79,8 +86,7 @@ const DesktopScreen = ({ onLock }) => {
       const target = prev.find(w => w.id === id);
       if (!target || target.isActive) return prev;
 
-      const nextZ = highestZIndex + 1;
-      setHighestZIndex(nextZ);
+      const nextZ = getNextZIndex(prev);
       return prev.map(w =>
         w.id === id
           ? { ...w, isActive: true, zIndex: nextZ }
@@ -107,8 +113,7 @@ const DesktopScreen = ({ onLock }) => {
         );
       } else {
         // Window is inactive or minimized -> bring to front and active
-        const nextZ = highestZIndex + 1;
-        setHighestZIndex(nextZ);
+        const nextZ = getNextZIndex(prev);
         return prev.map(w =>
           w.id === id ? { ...w, isMinimized: false, isActive: true, zIndex: nextZ } : { ...w, isActive: false }
         );

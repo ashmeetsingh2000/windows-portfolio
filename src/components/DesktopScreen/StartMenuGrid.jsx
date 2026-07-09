@@ -2,8 +2,16 @@ import React from 'react';
 import styles from './StartMenuGrid.module.css';
 
 const StartMenuGrid = ({ apps, onAppClick, closeMenu }) => {
+  const handleKeyDown = (e, app) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onAppClick(app);
+      closeMenu();
+    }
+  };
+
   return (
-    <div className={styles.gridContainer}>
+    <div className={styles.gridContainer} role="menu" aria-label="Start menu programs list">
       {apps.map(app => (
         <div 
           key={`start-${app.id}`}
@@ -12,6 +20,10 @@ const StartMenuGrid = ({ apps, onAppClick, closeMenu }) => {
             onAppClick(app);
             closeMenu();
           }}
+          onKeyDown={(e) => handleKeyDown(e, app)}
+          role="menuitem"
+          tabIndex={0}
+          aria-label={`Launch ${app.title}`}
         >
           <div className={styles.itemIcon}>
              {app.iconPath ? (

@@ -435,7 +435,7 @@ export const SKILLS_TREE = {
           type: 'technology',
           status: 'core',
           description:
-            'Platform for code hosting, pull requests, CI/CD workflows, code review, and open source collaboration.',
+            'Platform for code hosting, pull requests, CI/CD workflows, code review.',
         },
         {
           id: 'jira',

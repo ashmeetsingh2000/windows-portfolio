@@ -76,6 +76,9 @@ const Taskbar = ({ windows, onTaskbarClick, onLock, onAppClick }) => {
       <div 
         ref={startMenuRef}
         className={`${styles.startMenu} ${isStartOpen ? styles.startMenuOpen : ''}`}
+        role="dialog"
+        aria-label="Start Menu"
+        aria-hidden={!isStartOpen}
       >
         <div className={styles.startMenuContent}>
           <div className={styles.startMenuPlaceholder}>
@@ -99,7 +102,7 @@ const Taskbar = ({ windows, onTaskbarClick, onLock, onAppClick }) => {
             </div>
             <span>Ashmeet Singh</span>
           </div>
-          <button className={styles.powerBtn} onClick={onLock} title="Lock Desktop">
+          <button className={styles.powerBtn} onClick={onLock} title="Lock Desktop" aria-label="Lock Desktop">
             <svg
               stroke="white"
               fill="none"
@@ -120,12 +123,15 @@ const Taskbar = ({ windows, onTaskbarClick, onLock, onAppClick }) => {
       </div>
 
       {/* Taskbar */}
-      <div className={styles.taskbar}>
+      <div className={styles.taskbar} role="navigation" aria-label="Taskbar">
         <div className={styles.leftSection}>
           <button
             ref={startBtnRef}
             className={`${styles.startBtn} ${isStartOpen ? styles.startBtnActive : ''}`}
             onClick={() => setIsStartOpen(!isStartOpen)}
+            aria-label="Start Menu"
+            aria-haspopup="true"
+            aria-expanded={isStartOpen}
           >
             {/* Simple Windows-like logo placeholder */}
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -139,12 +145,21 @@ const Taskbar = ({ windows, onTaskbarClick, onLock, onAppClick }) => {
           <div className={styles.taskbarDivider}></div>
           
           {/* App Group Container (Pinned + Running) */}
-          <div className={styles.appGroup}>
+          <div className={styles.appGroup} role="toolbar" aria-label="Quick launch and active tasks">
             {appRegistry.filter(app => app.type === 'link').map(app => (
               <div
                 key={`pinned-${app.id}`}
                 className={styles.taskbarItem}
                 onClick={() => onAppClick(app)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onAppClick(app);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Open ${app.title}`}
                 title={app.title}
               >
                 <div className={styles.taskbarItemIcon}>
@@ -173,6 +188,15 @@ const Taskbar = ({ windows, onTaskbarClick, onLock, onAppClick }) => {
                   key={win.id}
                   className={`${styles.taskbarItem} ${win.isActive && !win.isMinimized ? styles.taskbarItemActive : ''}`}
                   onClick={() => onTaskbarClick(win.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      onTaskbarClick(win.id);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${win.title} window - ${win.isActive && !win.isMinimized ? 'active' : win.isMinimized ? 'minimized' : 'inactive'}`}
                   title={win.title}
                 >
                   <div className={styles.taskbarItemIcon}>

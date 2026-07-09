@@ -14,12 +14,13 @@ const DesktopExperience = () => {
 
         <div className={styles.layoutGrid}>
           {/* Left Navigation Panel */}
-          <div className={styles.sidebar}>
+          <div className={styles.sidebar} role="navigation" aria-label="Work Experience Roles">
             {experienceData.map((exp) => (
               <button
                 key={exp.id}
                 className={`${styles.navItem} ${activeTab === exp.id ? styles.activeNavItem : ''}`}
                 onClick={() => setActiveTab(exp.id)}
+                aria-current={activeTab === exp.id ? "true" : "false"}
               >
                 <span className={styles.navDuration}>{exp.duration}</span>
                 <span className={styles.navRole}>{exp.role}</span>
