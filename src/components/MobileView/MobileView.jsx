@@ -10,7 +10,7 @@ const MobileView = () => {
     >
       <div className={styles['mobile-overlay']} />
       <div className={styles['mobile-content']}>
-        <h1 className={styles['mobile-text']}>Under Development</h1>
+        <h2 className={styles['mobile-text']}>This portfolio is designed for a larger screen. Please visit on a laptop or desktop for the best experience.</h2>
       </div>
     </div>
   );
