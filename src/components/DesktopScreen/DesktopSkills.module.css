@@ -795,7 +795,8 @@
   }
 
   .serviceGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
   }
 
   .perfSummary {

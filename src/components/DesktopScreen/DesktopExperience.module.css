@@ -301,11 +301,20 @@
   text-overflow: ellipsis;
 }
 
-/* Responsive adjustments for window resizing */
+/* Responsive adjustments for mobile screens */
 @media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.75rem 3rem 0.75rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    padding-bottom: 0.75rem;
+  }
+
   .layoutGrid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
   
   .sidebar {
@@ -314,25 +323,53 @@
     padding: 0.5rem;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+    gap: 0.5rem;
+    scrollbar-width: none;
+  }
+
+  .sidebar::-webkit-scrollbar {
+    display: none;
   }
   
   .navItem {
     flex: 0 0 auto;
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 0.9rem;
+    min-width: 140px;
   }
   
+  .roleCard {
+    padding: 1.25rem;
+    gap: 1.25rem;
+  }
+
   .roleHeader {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.5rem;
   }
   
+  .roleTitle {
+    font-size: 1.3rem;
+  }
+
+  .companyName {
+    font-size: 1rem;
+  }
+
   .metaInfo {
     text-align: left;
   }
-}
 
-@media (max-width: 500px) {
-  .container {
-    padding: 1rem;
+  .summaryParagraph {
+    font-size: 0.95rem;
+  }
+
+  .responsibilityItem {
+    font-size: 0.9rem;
+  }
+
+  .projectsGrid {
+    grid-template-columns: 1fr;
   }
 }
+

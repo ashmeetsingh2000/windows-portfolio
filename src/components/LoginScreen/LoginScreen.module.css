@@ -128,3 +128,23 @@
     transform: translateY(0);
   }
 }
+
+@media (max-width: 768px) {
+  .profile-image {
+    width: 140px;
+    height: 140px;
+  }
+
+  .user-name {
+    font-size: 1.75rem;
+    margin-bottom: 24px;
+  }
+
+  .sign-in-button {
+    padding: 12px 56px;
+    font-size: 1.05rem;
+    min-height: 48px;
+    border-radius: 8px;
+  }
+}
+

@@ -7,12 +7,12 @@ import './App.css';
 
 function App() {
   const [screen, setScreen] = useState('lock'); // 'lock' | 'login' | 'loading' | 'desktop'
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 400);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
   const transitionRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 400);
+      setIsMobile(window.innerWidth <= 768);
     };
 
     const handleContextMenu = (e) => {
@@ -61,7 +61,14 @@ function App() {
   }, []);
 
   if (isMobile) {
-    return <MobileView />;
+    return (
+      <MobileView
+        screen={screen}
+        onUnlock={handleUnlock}
+        onSignIn={handleSignIn}
+        onLock={handleLock}
+      />
+    );
   }
 
   const isLockVisible = screen === 'lock';

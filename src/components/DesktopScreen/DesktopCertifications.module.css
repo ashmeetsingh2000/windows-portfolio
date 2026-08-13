@@ -164,9 +164,33 @@
   transform: scale(0.98);
 }
 
-/* Responsive adjustments for window resizing */
-@media (max-width: 500px) {
+/* Responsive adjustments for mobile screens */
+@media (max-width: 768px) {
   .container {
-    padding: 1.25rem;
+    padding: 1rem 0.75rem 3rem 0.75rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .introParagraph {
+    font-size: 0.95rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1.15rem;
+  }
+
+  .button {
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    border-radius: 8px;
+    font-size: 0.95rem;
   }
 }

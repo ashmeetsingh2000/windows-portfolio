@@ -36,3 +36,39 @@
   margin: 16px 0 0 0;
   opacity: 0.9;
 }
+
+.lock-hint {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 24px;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.5px;
+  animation: pulseHint 2s infinite ease-in-out;
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.95; }
+}
+
+@media (max-width: 768px) {
+  .lock-container {
+    padding: 32px 24px 60px 24px;
+    align-items: flex-end;
+  }
+
+  .lock-time {
+    font-size: clamp(4.2rem, 16vw, 6.5rem);
+    letter-spacing: -2px;
+  }
+
+  .lock-date {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    margin-top: 8px;
+  }
+
+  .lock-hint {
+    font-size: 0.9rem;
+    margin-top: 16px;
+  }
+}

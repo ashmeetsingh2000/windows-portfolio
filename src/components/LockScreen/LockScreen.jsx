@@ -63,6 +63,7 @@ const LockScreen = ({ onUnlock, isActive }) => {
       <div className={styles['lock-clock']}>
         <h1 className={styles['lock-time']}>{timeString}</h1>
         <h2 className={styles['lock-date']}>{dateString}</h2>
+        <p className={styles['lock-hint']}>Tap anywhere to unlock</p>
       </div>
     </div>
   );

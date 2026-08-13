@@ -114,15 +114,54 @@
   border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* Responsive adjustments for window resizing */
-@media (max-width: 500px) {
+/* Responsive adjustments for mobile screens */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.25rem 1rem 3rem 1rem;
+  }
+
+  .contentWrapper {
+    gap: 1.75rem;
+  }
+
   .profileSection {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
   }
-  
-  .container {
-    padding: 1.25rem;
+
+  .profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+
+  .name {
+    font-size: 1.75rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .intro {
+    font-size: 0.95rem;
+  }
+
+  .sectionHeader {
+    font-size: 1.2rem;
+  }
+
+  .paragraph {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .tag {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
   }
 }
+
