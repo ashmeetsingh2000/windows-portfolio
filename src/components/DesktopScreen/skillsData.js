@@ -374,7 +374,7 @@ export const SKILLS_TREE = {
           id: 'selenium',
           label: 'Selenium',
           type: 'technology',
-          status: 'core',
+          status: 'familiar',
           description:
             'Browser automation framework for testing, web scraping, and automated workflows.',
         },
@@ -382,7 +382,7 @@ export const SKILLS_TREE = {
           id: 'browser_automation',
           label: 'Browser Automation',
           type: 'technology',
-          status: 'core',
+          status: 'familiar',
           description:
             'End-to-end browser automation for testing, data extraction, and workflow automation.',
         },
