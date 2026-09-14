@@ -16,11 +16,19 @@ const MobileView = ({ screen = 'desktop', onUnlock, onSignIn, onLock }) => {
   const bgPath = `${import.meta.env.BASE_URL}${WALLPAPERS[bgIndex]}`;
   const profilePath = `${import.meta.env.BASE_URL}profile2.jpg`;
 
-  // Update clock time
+  // Update clock time every minute when mobile desktop is active
   useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(timer);
-  }, []);
+    if (screen !== 'desktop') return;
+
+    const updateTime = () => setTime(new Date());
+    const syncTimeout = setTimeout(updateTime, 0);
+    const timer = setInterval(updateTime, 60000);
+
+    return () => {
+      clearTimeout(syncTimeout);
+      clearInterval(timer);
+    };
+  }, [screen]);
 
   // Cycle wallpaper background
   const changeWallpaper = useCallback(() => {
