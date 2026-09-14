@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, Suspense } from 'react';
 import Draggable from 'react-draggable';
 import styles from './Window.module.css';
 import { appRegistry } from '../../config/apps';
+import WindowLoader from './WindowLoader';
 
 const Window = ({ window, position, onDragStop, onClose, onMinimize, onToggleFullscreen, onFocus }) => {
   const nodeRef = useRef(null);
@@ -68,7 +69,9 @@ const Window = ({ window, position, onDragStop, onClose, onMinimize, onToggleFul
           </div>
         </div>
         <div className={styles.content}>
-          {AppComponent ? <AppComponent /> : <p>Content for {window.title}</p>}
+          <Suspense fallback={<WindowLoader />}>
+            {AppComponent ? <AppComponent /> : <p>Content for {window.title}</p>}
+          </Suspense>
         </div>
       </div>
     </Draggable>

@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import styles from './MobileAppContainer.module.css';
+import WindowLoader from '../DesktopScreen/WindowLoader';
 
 const MobileAppContainer = ({ app, onClose }) => {
   const AppComponent = app ? app.component : null;
@@ -57,7 +58,9 @@ const MobileAppContainer = ({ app, onClose }) => {
       </div>
 
       <div className={styles.contentBody}>
-        {AppComponent ? <AppComponent /> : <p style={{ padding: '24px' }}>Content for {app.title}</p>}
+        <Suspense fallback={<WindowLoader />}>
+          {AppComponent ? <AppComponent /> : <p style={{ padding: '24px' }}>Content for {app.title}</p>}
+        </Suspense>
       </div>
     </div>
   );

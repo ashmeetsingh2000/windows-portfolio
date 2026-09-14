@@ -1,8 +1,10 @@
-import DesktopAbout from '../components/DesktopScreen/DesktopAbout';
-import DesktopCertifications from '../components/DesktopScreen/DesktopCertifications';
-import DesktopSkills from '../components/DesktopScreen/DesktopSkills';
-import DesktopExperience from '../components/DesktopScreen/DesktopExperience';
-import DesktopProjects from '../components/DesktopScreen/DesktopProjects';
+import { lazy } from 'react';
+
+const DesktopAbout = lazy(() => import('../components/DesktopScreen/DesktopAbout'));
+const DesktopCertifications = lazy(() => import('../components/DesktopScreen/DesktopCertifications'));
+const DesktopSkills = lazy(() => import('../components/DesktopScreen/DesktopSkills'));
+const DesktopExperience = lazy(() => import('../components/DesktopScreen/DesktopExperience'));
+const DesktopProjects = lazy(() => import('../components/DesktopScreen/DesktopProjects'));
 
 export const appRegistry = [
   {
